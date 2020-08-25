@@ -1,0 +1,40 @@
+server:
+  port: 8011
+
+spring:
+  application:
+    name: third-party-center
+
+  #zipkin
+  zipkin:
+    base-url: http://localhost:9411/
+    #采样比例1
+  sleuth:
+    sampler:
+      rate: 1
+
+    #  健康检查相关
+  boot:
+    admin:
+      client:
+        url: http://127.0.0.1:6123
+management:
+  endpoints:
+    web:
+      exposure:
+        #yml加双引号，properties不用加
+        include: "*"
+  health:
+    ##默认是never
+    show-details: ALWAYS
+    enabled: true
+
+#注册中心
+eureka:
+  client:
+    #设置服务注册中心的URL
+    service-url:
+      defaultZone: http://root:root@localhost:7901/eureka/
+  instance:
+    hostname: localhost
+    instance-id: ${spring.application.name}-${spring.cloud.client.ip-address}-${server.port}

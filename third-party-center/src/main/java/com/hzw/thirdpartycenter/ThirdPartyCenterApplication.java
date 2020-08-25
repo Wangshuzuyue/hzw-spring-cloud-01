@@ -1,0 +1,13 @@
+package com.hzw.thirdpartycenter;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class ThirdPartyCenterApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(ThirdPartyCenterApplication.class, args);
+	}
+
+}

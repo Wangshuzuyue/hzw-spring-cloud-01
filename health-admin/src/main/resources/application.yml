@@ -1,0 +1,33 @@
+server:
+  port: 6123
+
+spring:
+  application:
+    name: health-admin
+#  security:
+#    user:
+#      name: root
+#      password: root
+
+#\u6CE8\u518C\u4E2D\u5FC3
+eureka:
+  client:
+    #\u8BBE\u7F6E\u670D\u52A1\u6CE8\u518C\u4E2D\u5FC3\u7684URL
+    service-url:
+      defaultZone: http://root:root@localhost:7901/eureka/
+  instance:
+    hostname: localhost
+    lease-renewal-interval-in-seconds: 1
+    instance-id: ${spring.application.name}-${spring.cloud.client.ip-address}-${server.port}
+
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        #yml\u52A0\u53CC\u5F15\u53F7\uFF0Cproperties\u4E0D\u7528\u52A0
+#        include: "*"
+#  endpoint:
+#    health:
+#      ##\u9ED8\u8BA4\u662Fnever
+#      show-details: ALWAYS
+#      enabled: true

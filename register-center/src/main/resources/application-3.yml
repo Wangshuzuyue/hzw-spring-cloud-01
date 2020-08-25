@@ -1,0 +1,41 @@
+#单节点
+#应用名称及验证账号
+spring:
+  application:
+    name: eureka
+  security:
+    user:
+      name: root
+      password: root
+
+server:
+  port: 7903
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+
+    #是否将自己注册到Eureka Server,默认为true，
+    #如果是单节点纯当server，设置成false，表明该服务不会向eureka注册自己的信息
+    #集群要设置成true
+    register-with-eureka: true
+
+    #是否从eureka server获取注册信息，如果是单节点，不需要同步其他节点数据，用false
+    fetch-registry: true
+
+    service-url:
+      #设置服务注册中心的URL
+      #集群的话，这个地址就是peer的地址
+      defaultZone: http://root:root@localhost:7901/eureka/,http://root:root@localhost:7902/eureka/,http://root:root@localhost:7903/eureka/
+  server:
+    #自我保护机制【微服务数量多时打开，少的话建议不打开】
+    enable-self-preservation: false
+    #自我保护触发阈值 默认0.85【续约百分比】
+    renewal-percent-threshold: 0.85
+    #剔除服务定时任务的执行间隔 默认60s
+    eviction-interval-timer-in-ms: 5000
+    #服务实例缓存刷新频率 默认30s 降低该值可提高服务被发现的速度
+    response-cache-update-interval-ms: 2000
+    #从readOnlyCacheMap中读取服务注册实例的开关 默认true 【即三级缓存开关】
+    use-read-only-response-cache: false

@@ -1,0 +1,26 @@
+server:
+  port: 6001
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/Wangshuzuyue/config-files
+          username:
+          password:
+          #\u9ED8\u8BA4\u662F\u79D2\uFF0C\u56E0\u4E3Agit\u6162
+          timeout: 15
+
+#\u6CE8\u518C\u4E2D\u5FC3
+eureka:
+  client:
+    #\u8BBE\u7F6E\u670D\u52A1\u6CE8\u518C\u4E2D\u5FC3\u7684URL
+    service-url:
+      defaultZone: http://root:root@localhost:7901/eureka/
+  instance:
+    hostname: localhost
+    instance-id: ${spring.application.name}-${spring.cloud.client.ip-address}-${server.port}
+
